@@ -9,9 +9,9 @@ npm install -g 7niu
 
 
 ## api
-- `7niu upload \[dir]` 上传指定目录到七牛云存储
+- `7niu upload [dir]` 上传指定目录到七牛云存储
 - `7niu version` 输出版本信息
-- `7niu json \[dir]` 在指定目录生成 `7niu.json` 模板文件
+- `7niu json [dir]` 在指定目录生成 `7niu.json` 模板文件
 - `7niu help` 输出帮助信息
 
 
