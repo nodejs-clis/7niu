@@ -1,0 +1,43 @@
+{
+  "name": "7niu",
+  "version": "0.0.1",
+  "private": true,
+  "description": "nodejs-7niu description",
+  "scripts": {},
+  "preferGlobal": false,
+  "bin": {},
+  "engines": {
+    "node": ">= 0.10.0",
+    "iojs": ">= 1.0.0"
+  },
+  "main": "index.js",
+  "keywords": [
+    "qiniu",
+    "cloudcome",
+    "ydr.me"
+  ],
+  "author": {
+    "name": "cloudcome",
+    "email": "cloudcome@163.com",
+    "url": "http://ydr.me"
+  },
+  "contributors": [],
+  "homepage": "https://github.com/cloudcome/nodejs-7niu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cloudcome/nodejs-7niu"
+  },
+  "bugs": {
+    "url": "https://github.com/cloudcome/nodejs-7niu/issues"
+  },
+  "dependencies": {
+    "colors": "^1.1.0",
+    "glob": "^5.0.6",
+    "howdo": "^1.1.5",
+    "progress": "^1.1.8",
+    "ydr-utils": "^21.11.0"
+  },
+  "peerDependencies": {},
+  "devDependencies": {},
+  "licenses": "MIT"
+}
