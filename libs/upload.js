@@ -28,9 +28,9 @@ var uploadURL = 'http://up.qiniu.com';
 module.exports = function upload(dir, options, file, callback) {
     // 文件的根目录
     var absDir = path.join(dir, options.src);
-    var relativeDir = path.relative(absDir, file);
+    var relativePath = path.relative(absDir, file);
     // 文件存放路径
-    var putDir = path.join(options.dest, relativeDir);
+    var putDir = path.dirname(path.join(options.dest, relativePath));
     var extname = path.extname(file);
     var fd = new FormData();
     var uploadToken = token.generate({
