@@ -1,7 +1,7 @@
 {
   "name": "7niu",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "description": "nodejs-7niu description",
   "scripts": {},
   "preferGlobal": false,
