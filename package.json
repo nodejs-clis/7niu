@@ -5,7 +5,9 @@
   "description": "nodejs-7niu description",
   "scripts": {},
   "preferGlobal": false,
-  "bin": {},
+  "bin": {
+    "7niu": "./clis/7niu.js"
+  },
   "engines": {
     "node": ">= 0.10.0",
     "iojs": ">= 1.0.0"
