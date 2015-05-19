@@ -10,8 +10,8 @@ var log = require('./log.js');
 var path = require('path');
 var fs = require('fs-extra');
 var json = {
-    access_key: 'your_accessKeyId',
-    secret_key: 'your_accessKeySecret',
+    access_key: 'your_access_key',
+    secret_key: 'your_secret_key',
     bucket: 'your_bucket',
     src: './',
     upload: ['./**/*.*'],
