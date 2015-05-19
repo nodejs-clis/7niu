@@ -1,6 +1,6 @@
 {
   "name": "7niu",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "description": "七牛云存储命令行",
   "scripts": {},
@@ -38,7 +38,7 @@
     "glob": "^5.0.6",
     "howdo": "^1.1.5",
     "progress": "^1.1.8",
-    "ydr-utils": "^21.11.0"
+    "ydr-utils": "^21.12.0"
   },
   "peerDependencies": {},
   "devDependencies": {},
