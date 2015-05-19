@@ -30,7 +30,7 @@ switch ((cmdArg0 || "").toLowerCase()) {
     default :
         log(true, 'alioss upload [dir]', '上传指定目录到阿里云 OSS', 'success');
         log(true, 'alioss version', '输出版本信息', 'success');
-        log(true, 'alioss json [dir]', '在指定目录生成 `alioss.json` 文件', 'success');
+        log(true, 'alioss json [dir]', '在指定目录生成 `7niu.json` 文件', 'success');
         log(true, 'alioss help', '输出帮助信息', 'success');
 }
 
