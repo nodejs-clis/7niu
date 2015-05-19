@@ -16,7 +16,6 @@ var fs = require('fs');
 var path = require('path');
 var FormData = require('form-data');
 var uploadURL = 'http://up.qiniu.com';
-var REG_TITLE = /<title>([\s\S]*?)<\/title>/;
 
 
 /**
@@ -27,23 +26,26 @@ var REG_TITLE = /<title>([\s\S]*?)<\/title>/;
  * @param callback {Function} 上传完毕回调
  */
 module.exports = function upload(dir, options, file, callback) {
-    // 目标路径
-    dir = path.join(dir, options.src);
-
+    // 文件的根目录
+    var absDir = path.join(dir, options.src);
+    var relativeDir = path.relative(absDir, file);
+    // 文件存放路径
+    var putDir = path.join(options.dest, relativeDir);
     var extname = path.extname(file);
-    var headers = {
-        'content-type': mime.get(extname)
-    };
     var fd = new FormData();
-
-    fd.append('key', token.generate({
+    var uploadToken = token.generate({
         bucket: options.bucket,
-        dirname: dir
-    }, options.access_key, options.secret_key));
-    fd.append('my_buffer', new Buffer(10));
-    fd.append('file', fs.createReadStream(file));
-    dato.extend(headers, options.headers);
-    request.put({
+        dirname: putDir,
+        filename: path.basename(file)
+    }, options.access_key, options.secret_key);
+
+    fd.append('key', uploadToken.key);
+    fd.append('token', uploadToken.token);
+    fd.append('file', fs.createReadStream(file), {
+        contentType: mime.get(extname)
+    });
+
+    request.post({
         url: uploadURL,
         form: fd
     }, function (err, body, res) {

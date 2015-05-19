@@ -18,6 +18,8 @@ var defaults = {
     bucket: '',
     // 路径前缀
     dirname: '',
+    // 文件名
+    filename: '',
     // 过期时间，单位：秒
     expires: 3600,
     insertOnly: undefined,
@@ -72,7 +74,7 @@ exports.generate = function (config, ak, sk) {
         config.dirname = '';
     }
 
-    var key = config.dirname + random.guid();
+    var key = config.dirname + (config.filename || random.guid());
 
     if (!config.scope) {
         // 文件名
@@ -93,7 +95,7 @@ exports.generate = function (config, ak, sk) {
     config.deadline = config.expires + Math.floor(Date.now() / 1000);
     config.expires = undefined;
 
-    console.log(config);
+    //console.log(config);
 
     var encoded = urlsafeBase64Encode(JSON.stringify(config));
     var encoded_signed = base64ToUrlSafe(hmacSha1(encoded, sk));
