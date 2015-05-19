@@ -1,10 +1,10 @@
 {
   "name": "7niu",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": false,
   "description": "七牛云存储命令行",
   "scripts": {},
-  "preferGlobal": false,
+  "preferGlobal": true,
   "bin": {
     "7niu": "./clis/7niu.js"
   },
