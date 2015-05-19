@@ -1,5 +1,5 @@
 /*!
- * 文件描述
+ * 生成配置文件
  * @author ydr.me
  * @create 2015-03-11 18:16
  */
@@ -10,14 +10,9 @@ var log = require('./log.js');
 var path = require('path');
 var fs = require('fs-extra');
 var json = {
-    accessKeyId: 'your_accessKeyId',
-    accessKeySecret: 'your_accessKeySecret',
+    access_key: 'your_accessKeyId',
+    secret_key: 'your_accessKeySecret',
     bucket: 'your_bucket',
-    host: 'oss-cn-hangzhou.aliyuncs.com',
-    // headers
-    headers: {
-        'cache-control': 'max-age=315360000'
-    },
     src: './',
     upload: ['./**/*.*'],
     dest: '/test/',
