@@ -8,8 +8,6 @@
 
 var mime = require('ydr-utils').mime;
 var request = require('ydr-utils').request;
-var typeis = require('ydr-utils').typeis;
-var dato = require('ydr-utils').dato;
 var token = require('./token.js');
 var log = require('./log.js');
 var fs = require('fs');
@@ -42,7 +40,7 @@ module.exports = function upload(dir, options, file, callback) {
     fd.append('key', uploadToken.key);
     fd.append('token', uploadToken.token);
     fd.append('file', fs.createReadStream(file), {
-        contentType: mime.get(extname)
+        contentType: mime.get(extname, options.contentType)
     });
 
     request.post({
