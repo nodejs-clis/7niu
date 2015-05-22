@@ -45,7 +45,8 @@ module.exports = function upload(dir, options, file, callback) {
 
     request.post({
         url: uploadURL,
-        form: fd
+        form: fd,
+        timeout: 3000000
     }, function (err, body, res) {
         if (err) {
             log('upload file', file, 'error');
