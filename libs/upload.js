@@ -8,10 +8,10 @@
 
 var mime = require('ydr-utils').mime;
 var request = require('ydr-utils').request;
-var token = require('./token.js');
+var path = require('ydr-utils').path;
+var qiniu = require('ydr-utils').qiniu;
 var log = require('./log.js');
 var fs = require('fs');
-var path = require('path');
 var FormData = require('form-data');
 var uploadURL = 'http://up.qiniu.com';
 
@@ -31,14 +31,16 @@ module.exports = function upload(dir, options, file, callback) {
     var putDir = path.dirname(path.join(options.dest, relativePath));
     var extname = path.extname(file);
     var fd = new FormData();
-    var uploadToken = token.generate({
+    var uploadKeyAndToken = qiniu.generateKeyAndToken({
         bucket: options.bucket,
-        dirname: putDir,
-        filename: path.basename(file)
-    }, options.access_key, options.secret_key);
+        dirname: path.toURI(putDir),
+        filename: path.toURI(path.basename(file)),
+        accessKey: options.access_key,
+        secretKey: options.secret_key
+    });
 
-    fd.append('key', uploadToken.key);
-    fd.append('token', uploadToken.token);
+    fd.append('key', uploadKeyAndToken.key);
+    fd.append('token', uploadKeyAndToken.token);
     fd.append('file', fs.createReadStream(file), {
         contentType: mime.get(extname, options.contentType)
     });
