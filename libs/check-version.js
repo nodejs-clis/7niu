@@ -9,7 +9,7 @@
 var pkg = require('../package.json');
 var log = require('./log.js');
 var request = require('ydr-utils').request;
-var url = 'http://registry.npmjs.com/alioss';
+var url = 'http://registry.npmjs.com/7niu';
 
 module.exports = function(){
     log('local version', pkg.version, 'success');
