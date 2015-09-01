@@ -36,7 +36,8 @@ module.exports = function upload(dir, options, file, callback) {
         dirname: path.toURI(putDir),
         filename: path.toURI(path.basename(file)),
         accessKey: options.access_key,
-        secretKey: options.secret_key
+        secretKey: options.secret_key,
+        mimeLimit: '*'
     });
 
     fd.append('key', uploadKeyAndToken.key);
