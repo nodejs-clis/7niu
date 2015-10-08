@@ -24,7 +24,7 @@ var EQUAL_SEP = '\t';
  * 获取缓存
  * @param files {Array}
  * @param options {Object}
- * @returns {{files: *, cacheMap: {}}}
+ * @returns {{files: *, cacheMapDone: {}, cacheMapAll: {}}}
  */
 exports.get = function (files, options) {
     var cache1 = '';
@@ -37,43 +37,38 @@ exports.get = function (files, options) {
             log('read file', err.message, 'error');
             process.exit(1);
         }
-
-        if(!cache1){
-            console.log(typeis(cache1));
-            log('hh',options.cacheFile, 'error');
-            process.exit(1);
-        }
     }
 
     var cacheList1 = cache1.split(LINE_SEP);
-    var cacheMap1 = {};
+    var cacheMapDone = {};
 
     if (cacheList1 && cacheList1[0]) {
         cacheList1.forEach(function (item) {
             var temp = item.split(EQUAL_SEP);
 
-            cacheMap1[temp[0]] = temp[1];
+            cacheMapDone[temp[0]] = temp[1];
         });
     }
 
-    var cacheMap2 = {};
+    var cacheMapAll = {};
     var files2 = [];
 
     files.forEach(function (file) {
-        var _cache1 = cacheMap1[file];
+        var _cache1 = cacheMapDone[file];
         var _cache2 = encryption.etag(file);
 
         if (_cache1 !== _cache2) {
             files2.push(file);
         }
 
-        cacheMap2[file] = _cache2;
+        cacheMapAll[file] = _cache2;
     });
 
 
     return {
         files: files2,
-        cacheMap: cacheMap2
+        cacheMapDone: cacheMapDone,
+        cacheMapAll: cacheMapAll
     };
 };
 

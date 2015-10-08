@@ -6,6 +6,8 @@ var path = require('path');
 var howdo = require('howdo');
 var ProgressBar = require('progress');
 
+var dato = require('ydr-utils').dato;
+
 var log = require('../libs/log.js');
 var traverse = require('../libs/traverse.js');
 var parseConfig = require('../libs/parse-config.js');
@@ -50,7 +52,7 @@ function upload(isAll) {
     var options = parseConfig(CLIDIR);
     var bar;
     var time = Date.now();
-    var cacheMap2 = {};
+    var cacheMapNew = {};
 
     options.cacheFile = path.join(CWD, cacheFile);
     howdo
@@ -60,19 +62,22 @@ function upload(isAll) {
         })
         // 2. 匹配增量文件
         .task(function (next, files) {
-            var cacheMap = null;
+            var cacheMapDone = null;
+            var cacheMapAll = null;
 
             if (!isAll) {
                 var meta = cache.get(files, options);
 
                 files = meta.files;
-                cacheMap = meta.cacheMap;
+                cacheMapDone = meta.cacheMapDone;
+                cacheMapAll = meta.cacheMapAll;
+                dato.extend(cacheMapNew, cacheMapDone);
             }
 
-            next(null, files, cacheMap);
+            next(null, files, cacheMapDone, cacheMapAll);
         })
         // 3. 上传操作
-        .task(function (next, files, cacheMap) {
+        .task(function (next, files, cacheMapDone, cacheMapAll) {
             var groups = [];
             var len = files.length;
 
@@ -94,8 +99,8 @@ function upload(isAll) {
                     doUpload(CLIDIR, options, file, function () {
                         bar.tick(1);
 
-                        if (cacheMap && cacheMap[file]) {
-                            cacheMap2[file] = cacheMap[file];
+                        if (cacheMapAll && cacheMapAll[file]) {
+                            cacheMapNew[file] = cacheMapAll[file];
                         }
 
                         done();
@@ -105,7 +110,7 @@ function upload(isAll) {
             }).follow(next);
         })
         .follow(function () {
-            cache.set(cacheMap2, options);
+            cache.set(cacheMapNew, options);
             log('upload', 'upload all files', 'success');
             log('past', (Date.now() - time) + ' ms', 'success');
         });
