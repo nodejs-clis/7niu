@@ -59,14 +59,19 @@ function upload(isAll) {
         })
         // 2. 匹配增量文件
         .task(function (next, files) {
+            var cacheMap = null;
+
             if (!isAll) {
-                files = cache(files, options);
+                var meta = cache(files, options);
+
+                files = meta.files;
+                cacheMap = meta.cacheMap;
             }
 
-            next(null, files);
+            next(null, files, cacheMap);
         })
         // 3. 上传操作
-        .task(function (next, files) {
+        .task(function (next, files, cacheMap) {
             var groups = [];
             var len = files.length;
 
@@ -82,11 +87,18 @@ function upload(isAll) {
             });
             log('upload', '将上传 ' + len + ' 个文件', 'warning');
 
+            var cacheMap2 = {};
+
             howdo.each(groups, function (i, group, next) {
 
                 howdo.each(group, function (j, file, done) {
                     doUpload(CLIDIR, options, file, function () {
                         bar.tick(1);
+
+                        if(cacheMap && cacheMap[file]){
+                            cacheMap2[file] = cacheMap[file];
+                        }
+
                         done();
                     });
                 }).together(next);

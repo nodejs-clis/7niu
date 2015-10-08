@@ -24,7 +24,7 @@ var EQUAL_SEP = '\t';
  * 获取缓存
  * @param files {Array}
  * @param options {Object}
- * @returns {{files: *, cache: {}}}
+ * @returns {{files: *, cacheMap: {}}}
  */
 exports.get = function (files, options) {
     var cache1 = '';
@@ -67,7 +67,7 @@ exports.get = function (files, options) {
 
     return {
         files: files,
-        cache: cacheMap2
+        cacheMap: cacheMap2
     };
 };
 

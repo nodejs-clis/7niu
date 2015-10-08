@@ -27,14 +27,14 @@ module.exports = function traverse(dir, options, callback) {
 
     howdo.each(options.upload, function (index, gb, done) {
         gb = path.join(dir, options.src, gb);
-        glob(gb, {dot: false, nodir: true}, function (err, files2) {
+        glob(gb, {dot: false, nodir: true}, function (err, _files) {
             if (err) {
                 log('glob files', gb, 'error');
                 log('glob files', err.message, 'error');
                 return process.exit();
             }
 
-            files = files.concat(files2);
+            files = files.concat(_files);
             done(err);
         });
     }).together(function (err) {
