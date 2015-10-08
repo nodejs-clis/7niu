@@ -18,11 +18,13 @@ var json = {
     dest: '/test/',
     // 并行数量
     parallel: 10,
-    contentType: 'application/octect-stream'
+    contentType: 'application/octect-stream',
+    cache: '7niu.cache.log'
 };
 
 module.exports = function (dir) {
-    var file = path.join(dir, './alioss.json');
+    var file = path.join(dir, './7niu.json');
+
     fs.writeFile(file, JSON.stringify(json, null, 2), function (err) {
         if(err){
             log('write file', file, 'error');

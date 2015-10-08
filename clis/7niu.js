@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+'use strict';
+
+
 var log = require('../libs/log.js');
 var traverse = require('../libs/traverse.js');
 var parseConfig = require('../libs/parse-config.js');
