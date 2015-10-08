@@ -20,7 +20,13 @@ var LINE_SEP = '\n';
 var EQUAL_SEP = '\t';
 
 
-module.exports = function (files, options) {
+/**
+ * 获取缓存
+ * @param files {Array}
+ * @param options {Object}
+ * @returns {{files: *, cache: {}}}
+ */
+exports.get = function (files, options) {
     var cache1 = '';
 
     if (typeis.file(options.cacheFile)) {
@@ -58,9 +64,23 @@ module.exports = function (files, options) {
         cacheMap2[file] = _cache2;
     });
 
+
+    return {
+        files: files,
+        cache: cacheMap2
+    };
+};
+
+
+/**
+ * 设置缓存
+ * @param cacheMap {Object}
+ * @param options {Object}
+ */
+exports.set = function (cacheMap, options) {
     var cache2List = [];
 
-    dato.each(cacheMap2, function (file, etag) {
+    dato.each(cacheMap, function (file, etag) {
         cache2List.push(file + EQUAL_SEP + etag);
     });
 
@@ -73,7 +93,4 @@ module.exports = function (files, options) {
         log('write file', err.message, 'error');
         process.exit(1);
     }
-
-    return files2;
 };
-
