@@ -2,21 +2,23 @@
 
 'use strict';
 
+var path = require('path');
+var howdo = require('howdo');
+var ProgressBar = require('progress');
 
 var log = require('../libs/log.js');
 var traverse = require('../libs/traverse.js');
 var parseConfig = require('../libs/parse-config.js');
 var doUpload = require('../libs/upload.js');
 var cache = require('../libs/cache.js');
-var path = require('path');
-var howdo = require('howdo');
-var ProgressBar = require('progress');
 
 var CWD = process.cwd();
 var cmdArgs = process.argv.slice(2);
 var cmdArg0 = cmdArgs[0];
 var cmdArg1 = cmdArgs[1];
 var CLIDIR = cmdArg1 ? path.join(CWD, cmdArg1) : CWD;
+
+var cacheFile = '7niu.cache.log';
 
 switch ((cmdArg0 || "").toLowerCase()) {
     case 'upload':
@@ -49,7 +51,7 @@ function upload(isAll) {
     var bar;
     var time = Date.now();
 
-    options.cacheFile = path.join(CWD, options.cache);
+    options.cacheFile = path.join(CWD, cacheFile);
     howdo
         // 1. 找到要进行上传的文件列表
         .task(function (next) {

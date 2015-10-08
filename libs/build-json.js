@@ -18,8 +18,7 @@ var json = {
     dest: '/test/',
     // 并行数量
     parallel: 10,
-    contentType: 'application/octect-stream',
-    cache: '7niu.cache.log'
+    contentType: 'application/octect-stream'
 };
 
 module.exports = function (dir) {
