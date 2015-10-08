@@ -50,6 +50,7 @@ function upload(isAll) {
     var options = parseConfig(CLIDIR);
     var bar;
     var time = Date.now();
+    var cacheMap2 = {};
 
     options.cacheFile = path.join(CWD, cacheFile);
     howdo
@@ -62,7 +63,7 @@ function upload(isAll) {
             var cacheMap = null;
 
             if (!isAll) {
-                var meta = cache(files, options);
+                var meta = cache.get(files, options);
 
                 files = meta.files;
                 cacheMap = meta.cacheMap;
@@ -87,15 +88,13 @@ function upload(isAll) {
             });
             log('upload', '将上传 ' + len + ' 个文件', 'warning');
 
-            var cacheMap2 = {};
-
             howdo.each(groups, function (i, group, next) {
 
                 howdo.each(group, function (j, file, done) {
                     doUpload(CLIDIR, options, file, function () {
                         bar.tick(1);
 
-                        if(cacheMap && cacheMap[file]){
+                        if (cacheMap && cacheMap[file]) {
                             cacheMap2[file] = cacheMap[file];
                         }
 
@@ -106,6 +105,7 @@ function upload(isAll) {
             }).follow(next);
         })
         .follow(function () {
+            cache.set(cacheMap2, options);
             log('upload', 'upload all files', 'success');
             log('past', (Date.now() - time) + ' ms', 'success');
         });

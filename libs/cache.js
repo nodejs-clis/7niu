@@ -37,6 +37,12 @@ exports.get = function (files, options) {
             log('read file', err.message, 'error');
             process.exit(1);
         }
+
+        if(!cache1){
+            console.log(typeis(cache1));
+            log('hh',options.cacheFile, 'error');
+            process.exit(1);
+        }
     }
 
     var cacheList1 = cache1.split(LINE_SEP);
@@ -52,8 +58,6 @@ exports.get = function (files, options) {
 
     var cacheMap2 = {};
     var files2 = [];
-
-    console.log(cacheMap1);
 
     files.forEach(function (file) {
         var _cache1 = cacheMap1[file];
@@ -80,6 +84,10 @@ exports.get = function (files, options) {
  * @param options {Object}
  */
 exports.set = function (cacheMap, options) {
+    if (!cacheMap) {
+        return;
+    }
+
     var cache2List = [];
 
     dato.each(cacheMap, function (file, etag) {
