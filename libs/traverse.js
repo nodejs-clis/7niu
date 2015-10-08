@@ -38,13 +38,6 @@ module.exports = function traverse(dir, options, callback) {
             done(err);
         });
     }).together(function (err) {
-        var groups = [];
-        var len = files.length;
-
-        while (files.length) {
-            groups.push(files.splice(0, options.parallel));
-        }
-
-        callback(err, groups, len);
+        callback(err, files);
     });
 };
