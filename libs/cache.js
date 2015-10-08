@@ -53,6 +53,8 @@ exports.get = function (files, options) {
     var cacheMap2 = {};
     var files2 = [];
 
+    console.log(cacheMap1);
+
     files.forEach(function (file) {
         var _cache1 = cacheMap1[file];
         var _cache2 = encryption.etag(file);
@@ -66,7 +68,7 @@ exports.get = function (files, options) {
 
 
     return {
-        files: files,
+        files: files2,
         cacheMap: cacheMap2
     };
 };
