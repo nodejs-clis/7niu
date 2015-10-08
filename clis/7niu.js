@@ -23,6 +23,10 @@ switch ((cmdArg0 || "").toLowerCase()) {
         upload();
         break;
 
+    case 'uploadall':
+        upload(true);
+        break;
+
     case 'version':
         require('../libs/check-version.js')();
         break;
@@ -32,7 +36,8 @@ switch ((cmdArg0 || "").toLowerCase()) {
         break;
 
     default :
-        log(true, 'alioss upload [dir]', '上传指定目录到阿里云 OSS', 'success');
+        log(true, 'alioss upload [dir]', '增量上传指定目录到阿里云 OSS', 'success');
+        log(true, 'alioss uploadall [dir]', '全部上传指定目录到阿里云 OSS', 'success');
         log(true, 'alioss version', '输出版本信息', 'success');
         log(true, 'alioss json [dir]', '在指定目录生成 `7niu.json` 文件', 'success');
         log(true, 'alioss help', '输出帮助信息', 'success');
@@ -44,7 +49,7 @@ function upload(isAll) {
     var bar;
     var time = Date.now();
 
-    options.cacheFile = path.join(CWD, './7niu.json');
+    options.cacheFile = path.join(CWD, options.cache);
     howdo
         // 1. 找到要进行上传的文件列表
         .task(function (next) {
