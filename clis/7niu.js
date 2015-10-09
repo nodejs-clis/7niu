@@ -96,7 +96,11 @@ function upload(isAll) {
             howdo.each(groups, function (i, group, next) {
 
                 howdo.each(group, function (j, file, done) {
-                    doUpload(CLIDIR, options, file, function () {
+                    doUpload(CLIDIR, options, file, function (err) {
+                        if (err) {
+                            return done(err);
+                        }
+
                         bar.tick(1);
 
                         if (cacheMapAll && cacheMapAll[file]) {
@@ -109,9 +113,15 @@ function upload(isAll) {
 
             }).follow(next);
         })
-        .follow(function () {
+        .follow(function (err) {
             cache.set(cacheMapNew, options);
-            log('upload', 'upload all files', 'success');
+
+            if (err) {
+                log('upload', 'upload error', 'error');
+            } else {
+                log('upload', 'upload all files', 'success');
+            }
+
             log('past', (Date.now() - time) + ' ms', 'success');
         });
 }

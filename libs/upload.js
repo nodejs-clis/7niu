@@ -54,7 +54,7 @@ module.exports = function upload(dir, options, file, callback) {
         if (err) {
             log('upload file', file, 'error');
             log('upload file', err.message, 'error');
-            return process.exit();
+            return callback(err);
         }
 
         if (res.statusCode === 200) {
