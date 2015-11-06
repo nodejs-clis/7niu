@@ -1,4 +1,4 @@
-/*!
+/**
  * log
  * @author ydr.me
  * @create 2014-10-22 16:17
