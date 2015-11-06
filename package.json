@@ -33,14 +33,14 @@
     "url": "https://github.com/cloudcome/nodejs-7niu/issues"
   },
   "dependencies": {
-    "colors": "^1.1.0",
     "form-data": "^0.2.0",
+    "fs-extra": "^0.26.2",
     "glob": "^5.0.6",
     "howdo": "^1.1.5",
     "progress": "^1.1.8",
-    "ydr-utils": "^26.1.0"
+    "ydr-utils": "^30.6.0"
   },
   "peerDependencies": {},
   "devDependencies": {},
-  "licenses": "MIT"
+  "license": "MIT"
 }
