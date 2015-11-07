@@ -9,11 +9,22 @@ npm install -g 7niu
 
 
 ## api
-- `7niu upload [dir]` 上传指定目录到七牛云存储
-- `7niu version` 输出版本信息
-- `7niu json [dir]` 在指定目录生成 `7niu.json` 模板文件
-- `7niu help` 输出帮助信息
+```
+╔══════════════════════════════════════════════════════╗
+║   7niu@2.3.0                                         ║
+║   qiniu cloud command line                           ║
+╚══════════════════════════════════════════════════════╝
 
+1. Command
+   upload                 >> upload files to qiniu
+   init                   >> initial `7niu.json`
+   clear                  >> clear upload cache
+   version                >> show version information
+   help                   >> show help information
+
+2. Options
+   -d --dirname           >> specified a directory
+```
 
 
 ## 7niu.json
