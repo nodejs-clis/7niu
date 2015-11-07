@@ -2,7 +2,7 @@
   "name": "7niu",
   "version": "2.3.0",
   "private": false,
-  "description": "七牛云存储命令行",
+  "description": "qiniu cloud command line",
   "scripts": {},
   "preferGlobal": true,
   "bin": {
