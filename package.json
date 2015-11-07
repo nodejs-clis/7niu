@@ -6,7 +6,7 @@
   "scripts": {},
   "preferGlobal": true,
   "bin": {
-    "7niu": "./clis/7niu"
+    "7niu": "./bin/7niu"
   },
   "engines": {
     "node": ">= 0.10.0",
