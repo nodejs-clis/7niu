@@ -17,7 +17,7 @@ var json = {
     secret_key: 'your_secret_key',
     bucket: 'your_bucket',
     src: './',
-    upload: ['./*/**'],
+    upload: ['./**'],
     dest: '/test/',
     // 并行数量
     parallel: 10,

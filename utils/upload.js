@@ -16,6 +16,7 @@ var fs = require('fs');
 var FormData = require('form-data');
 
 var uploadURL = 'http://up.qiniu.com';
+var REG_START_END = /^\/|\/$/;
 
 
 /**
@@ -35,6 +36,10 @@ module.exports = function (file, options, callback) {
     callback = typeis.function(callback) ? callback : function () {
         // ignore
     };
+
+    options.destDirname = path.toURI(options.destDirname);
+    options.destDirname = options.destDirname.replace(REG_START_END, '');
+    options.destDirname = '/' + options.destDirname + '/';
 
     var relativePath = path.relative(options.srcDirname, file);
     var destPath = path.join(options.destDirname, relativePath);

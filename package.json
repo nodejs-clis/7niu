@@ -3,7 +3,9 @@
   "version": "2.3.0",
   "private": false,
   "description": "qiniu cloud command line",
-  "scripts": {},
+  "scripts": {
+    "test": "mocha -c --recursive --ui bdd test -t 0"
+  },
   "preferGlobal": true,
   "bin": {
     "7niu": "./bin/7niu"
@@ -38,7 +40,7 @@
     "glob": "^5.0.6",
     "howdo": "^1.1.5",
     "progress": "^1.1.8",
-    "ydr-utils": "^30.8.0"
+    "ydr-utils": "^30.10.0"
   },
   "peerDependencies": {},
   "devDependencies": {},
