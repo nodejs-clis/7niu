@@ -1,10 +1,10 @@
 {
   "name": "7niu",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "private": false,
   "description": "qiniu cloud command line",
   "scripts": {
-    "test": "mocha -c --recursive --ui bdd test -t 0"
+    "test": "node node_modules/mocha/bin/mocha -c --recursive --ui bdd test -t 0"
   },
   "preferGlobal": true,
   "bin": {
@@ -44,6 +44,8 @@
     "ydr-utils": "^30.10.0"
   },
   "peerDependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "^2.3.3"
+  },
   "license": "MIT"
 }
