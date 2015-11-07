@@ -28,7 +28,6 @@ var REG_START_END = /^\/|\/$/;
  * @param options.bucket {String} 七牛仓库
  * @param options.accessKey {String} ak
  * @param options.secretKey {String} sk
- * @param options.contentType {String} 默认 content-type
  * @param callback {Function} 上传回调
  * @returns {string}
  */
@@ -59,7 +58,7 @@ module.exports = function (file, options, callback) {
     fd.append('key', uploadKeyAndToken.key);
     fd.append('token', uploadKeyAndToken.token);
     fd.append('file', fs.createReadStream(file), {
-        contentType: mime.get(destExtname, options.contentType)
+        contentType: mime.get(destExtname)
     });
 
     request.post({
@@ -74,5 +73,17 @@ module.exports = function (file, options, callback) {
         if (res.statusCode === 200) {
             return callback(err, body);
         }
+
+        var json;
+
+        try {
+            json = JSON.parse(body);
+        } catch (err) {
+            json = {
+                error: 'parse upload response error'
+            }
+        }
+
+        callback(new Error(json.error));
     });
 };

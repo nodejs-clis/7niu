@@ -60,19 +60,26 @@ var matches = function (relative, version, data) {
 
 
 /**
- * 判断 file 是否缓存
- * @param file {String} 待判断文件路径
+ * 匹配文件列表是否存在缓存
+ * @param file {String|Array} 待判断文件路径或数组
  * @param options {Object} 配置
  * @param options.srcDirname {String} 原始目录
- * @returns {boolean}
+ * @returns {Array}
  */
 exports.get = function (file, options) {
     var cachePath = path.join(options.srcDirname, '7niu.cache.log');
     var data = getData(cachePath);
-    var relative = path.relative(options.srcDirname, file);
-    var version = encryption.etag(file);
+    var files = typeis.array(file) ? file : [file];
+    var ret = [];
 
-    return matches(relative, version, data);
+    dato.each(files, function (index, file) {
+        var relative = path.relative(options.srcDirname, file);
+        var version = encryption.etag(file);
+
+        ret.push(matches(relative, version, data));
+    });
+
+    return ret;
 };
 
 

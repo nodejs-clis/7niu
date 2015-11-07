@@ -20,7 +20,7 @@ describe('utils/parse-cache.js', function () {
             srcDirname: __dirname
         });
 
-        assert.equal(b, false);
+        assert.deepEqual(b, [false]);
     });
 
     it('set', function () {
