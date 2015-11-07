@@ -12,13 +12,10 @@ var path = require('ydr-utils').path;
 
 var upload = require('../../utils/upload.js');
 
-var srcDirname = path.join(__dirname, '../../_test/');
-var textFile = path.join(srcDirname, '1.txt');
-
 describe('utils/upload.js', function () {
     it('e', function (done) {
-        upload(textFile, {
-            srcDirname: srcDirname,
+        upload(__filename, {
+            srcDirname: __dirname,
             accessKey: 'x',
             secretKey: 'y',
             bucket: 'static',
