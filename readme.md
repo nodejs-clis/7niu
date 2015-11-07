@@ -1,4 +1,7 @@
 # 7niu
+
+[![Build Status][travis-img]][travis-url] 
+
 七牛云存储命令行。
 
 
@@ -41,7 +44,7 @@ npm install -g 7niu
 
     // 上传的文件列表，支持通配符，相对于 src
     "upload": [
-        "./**/*"
+        "./**"
     ],
 
     // 上传的 CDN 目录
@@ -74,3 +77,16 @@ npm install -g 7niu
     dest: '/example.com/'
 }
 ```
+
+## version
+### 2.x
+- 更好的命令行接口
+- 更好的版本控制
+
+### 1.x
+- 实现基本上传功能
+
+
+
+[travis-img]: https://travis-ci.org/cloudcome/nodejs-7niu.svg?branch=master
+[travis-url]: https://travis-ci.org/cloudcome/nodejs-7niu

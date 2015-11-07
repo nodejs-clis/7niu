@@ -17,6 +17,7 @@
   "main": "index.js",
   "keywords": [
     "qiniu",
+    "command line",
     "cloudcome",
     "ydr.me"
   ],
