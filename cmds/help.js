@@ -1,7 +1,7 @@
 /**
- * upload new files
+ * show help information
  * @author ydr.me
- * @create 2015-11-06 18:18
+ * @create 2015-11-07 09:54
  */
 
 
