@@ -27,16 +27,17 @@ module.exports = function (options) {
         return process.exit(1);
     }
 
+    var srcDirname = path.join(options.srcDirname, json.src);
     var json = require(dest7NiuJSONPath);
     var uploadFiles = path.glob(json.upload, {
-        srcDirname: options.srcDirname
+        srcDirname: srcDirname
     });
 
     return {
         accessKey: json.access_key,
         secretKey: json.secret_key,
         bucket: json.bucket,
-        srcDirname: path.join(options.srcDirname, json.src),
+        srcDirname: srcDirname,
         uploadFiles: uploadFiles,
         destDirname: json.dest,
         parallel: json.parallel

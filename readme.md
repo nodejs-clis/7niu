@@ -64,7 +64,7 @@ npm install -g 7niu
 |       |-- abc.js
 |       `-- def.js
 |-- css
-`-- alioss.json
+`-- 7niu.json
 ```
 要上传的资源为`./static/js/app/*`，线上的 CDN URL 为`/example.com/abc.js`。
 ```
