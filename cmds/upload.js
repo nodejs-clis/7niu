@@ -51,7 +51,7 @@ module.exports = function (options) {
             howdo
                 .each(group, function (j, file, done) {
                     upload(file, {
-                        srcDirname: options.srcDirname,
+                        srcDirname: configs.srcDirname,
                         destDirname: configs.destDirname,
                         bucket: configs.bucket,
                         accessKey: configs.accessKey,
