@@ -6,14 +6,14 @@
 
 'use strict';
 
+var fs = require('fs');
+var FormData = require('form-data');
+
 var mime = require('ydr-utils').mime;
 var request = require('ydr-utils').request;
 var path = require('ydr-utils').path;
 var qiniu = require('ydr-utils').qiniu;
-var debug = require('ydr-utils').debug;
 var typeis = require('ydr-utils').typeis;
-var fs = require('fs');
-var FormData = require('form-data');
 
 var uploadURL = 'http://up.qiniu.com';
 var REG_START_END = /^\/|\/$/;
@@ -25,9 +25,6 @@ var REG_START_END = /^\/|\/$/;
  * @param options {Object} 配置
  * @param options.srcDirname {String} 起始目录
  * @param options.destDirname {String} 目标目录
- * @param options.bucket {String} 七牛仓库
- * @param options.accessKey {String} ak
- * @param options.secretKey {String} sk
  * @param callback {Function} 上传回调
  * @returns {string}
  */
@@ -41,18 +38,8 @@ module.exports = function (file, options, callback) {
     options.destDirname = '/' + options.destDirname + '/';
 
     var relativePath = path.relative(options.srcDirname, file);
-    var destPath = path.join(options.destDirname, relativePath);
-    var destDirname = path.dirname(destPath);
-    var destBasename = path.basename(destPath);
-    var destExtname = path.extname(destPath);
-    var uploadKeyAndToken = qiniu.generateKeyAndToken({
-        bucket: options.bucket,
-        dirname: destDirname,
-        filename: destBasename,
-        accessKey: options.accessKey,
-        secretKey: options.secretKey,
-        mimeLimit: '*'
-    });
+    var destExtname = path.extname(file);
+    var uploadKeyAndToken = qiniu.signature(relativePath);
     var fd = new FormData();
 
     fd.append('key', uploadKeyAndToken.key);

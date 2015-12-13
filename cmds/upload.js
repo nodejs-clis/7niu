@@ -9,6 +9,7 @@
 
 var dato = require('ydr-utils').dato;
 var debug = require('ydr-utils').debug;
+var qiniu = require('ydr-utils').qiniu;
 var howdo = require('howdo');
 var Progress = require('progress');
 
@@ -23,6 +24,13 @@ module.exports = function (options) {
     // 1. parse config
     var configs = parseConfig({
         srcDirname: options.srcDirname
+    });
+
+    qiniu.config({
+        accessKey: configs.accessKey,
+        secretKey: configs.secretKey,
+        bucket: configs.bucket,
+        dirname: '/'
     });
 
     // 2. parse cache
@@ -52,10 +60,7 @@ module.exports = function (options) {
                 .each(group, function (j, file, done) {
                     upload(file, {
                         srcDirname: configs.srcDirname,
-                        destDirname: configs.destDirname,
-                        bucket: configs.bucket,
-                        accessKey: configs.accessKey,
-                        secretKey: configs.secretKey
+                        destDirname: configs.destDirname
                     }, function (err) {
                         if (err) {
                             return done(err);
