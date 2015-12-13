@@ -54,11 +54,12 @@ module.exports = function (file, options, callback) {
         timeout: -1
     }, function (err, body, res) {
         if (err) {
+            err.file = file;
             return callback(err, body);
         }
 
         if (res.statusCode === 200) {
-            return callback(err, body);
+            return callback(null, body);
         }
 
         var json;
@@ -71,6 +72,8 @@ module.exports = function (file, options, callback) {
             }
         }
 
-        callback(new Error(json.error));
+        err = new Error(json.error);
+        err.file = file;
+        callback(err);
     });
 };

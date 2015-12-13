@@ -30,7 +30,8 @@ module.exports = function (options) {
         accessKey: configs.accessKey,
         secretKey: configs.secretKey,
         bucket: configs.bucket,
-        dirname: '/'
+        dirname: '/',
+        mimeLimit: '*'
     });
 
     // 2. parse cache
@@ -86,10 +87,13 @@ module.exports = function (options) {
         })
         .follow()
         .try(function () {
+            console.log();
             debug.success('upload files', willUploadLength);
             debug.success('upload success', 'past ' + (Date.now() - startTime) + 'ms');
         })
         .catch(function (err) {
+            console.log();
+            debug.error('upload file', err.file);
             debug.error('upload error', err.message);
         });
 };
