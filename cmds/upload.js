@@ -30,7 +30,7 @@ module.exports = function (options) {
         accessKey: configs.accessKey,
         secretKey: configs.secretKey,
         bucket: configs.bucket,
-        dirname: '/',
+        dirname: configs.destDirname,
         mimeLimit: '*'
     });
 

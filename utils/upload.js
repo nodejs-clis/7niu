@@ -33,17 +33,13 @@ module.exports = function (file, options, callback) {
         // ignore
     };
 
-    options.destDirname = path.toURI(options.destDirname);
-    options.destDirname = options.destDirname.replace(REG_START_END, '');
-    options.destDirname = '/' + options.destDirname + '/';
-
     var relativePath = path.relative(options.srcDirname, file);
     var destExtname = path.extname(file);
-    var uploadKeyAndToken = qiniu.signature(relativePath);
+    var sign = qiniu.signature(relativePath);
     var fd = new FormData();
 
-    fd.append('key', uploadKeyAndToken.key);
-    fd.append('token', uploadKeyAndToken.token);
+    fd.append('key', sign.key);
+    fd.append('token', sign.token);
     fd.append('file', fs.createReadStream(file), {
         contentType: mime.get(destExtname)
     });
