@@ -21,7 +21,15 @@ var json = {
     dest: '/test/',
     // 并行数量
     parallel: 10,
-    contentType: 'application/octect-stream'
+    contentType: 'application/octect-stream',
+    // 上传前图片压缩
+    image: {
+        minify: false,
+        // http://zhitu.isux.us/
+        compressor: 'zhitu',
+        // 0.1 - 1
+        quality: 0.7
+    }
 };
 
 
