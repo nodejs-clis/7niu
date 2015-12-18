@@ -40,6 +40,9 @@ module.exports = function (options) {
         srcDirname: srcDirname,
         uploadFiles: uploadFiles,
         destDirname: json.dest,
-        parallel: json.parallel
+        parallel: json.parallel,
+        image: json.image
     };
 };
+
+
