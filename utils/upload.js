@@ -25,6 +25,8 @@ var REG_START_END = /^\/|\/$/;
  * @param options {Object} 配置
  * @param options.srcDirname {String} 起始目录
  * @param options.destDirname {String} 目标目录
+ * @param options.image {Object} 目标目录
+ * @param options.image.pressor {Object} 目标目录
  * @param callback {Function} 上传回调
  * @returns {string}
  */
