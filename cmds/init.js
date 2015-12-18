@@ -26,7 +26,7 @@ var json = {
     image: {
         minify: false,
         // http://zhitu.isux.us/
-        compressor: 'zhitu',
+        processor: 'zhitu',
         // 0.1 - 1
         quality: 0.7
     }
